@@ -18,7 +18,8 @@ def upload(local_path, remote_path):
     """
     if os.path.isfile(local_path):
         # 是文件
-        sftp.put(local_path, remote_path)
+        create_remote_file = os.path.join(remote_path, local_path.strip('./'))
+        sftp.put(local_path, create_remote_file)
     else:
         # 是文件夹
         try:
@@ -26,7 +27,6 @@ def upload(local_path, remote_path):
         except FileNotFoundError:
             sftp.mkdir(remote_path)
         if os.path.isdir(local_path):
-            print(local_path.strip('./'))
             create_remote_file = os.path.join(remote_path, local_path.strip('./'))
             create_sftp_file(sftp,create_remote_file)
 
@@ -52,7 +52,7 @@ with open(r'./config.json','r') as f:
     transport.connect(username=username, password=password)
     # 创建sftp实例
     sftp = paramiko.SFTPClient.from_transport(transport)
-    upload('./作业', '/www/wwwroot/code/python/')
+    upload('./python_01阶段内容.md', '/www/wwwroot/code/python/')
     # 关闭连接
     transport.close()
     f.close()
