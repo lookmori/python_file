@@ -52,7 +52,7 @@ with open(r'./config.json','r') as f:
     transport.connect(username=username, password=password)
     # 创建sftp实例
     sftp = paramiko.SFTPClient.from_transport(transport)
-    upload('./python_01阶段内容.md', '/www/wwwroot/code/python/')
+    upload('./python学习思维导图.pdf', '/www/wwwroot/code/python/')
     # 关闭连接
     transport.close()
     f.close()
