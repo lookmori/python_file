@@ -27,8 +27,8 @@ while flag:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             flag = False
-        key_down = pygame.key.get_pressed()
-        
+            
+    key_down = pygame.key.get_pressed() 
     screen.blit(bg_img,bg_rect)
     plane.move(key_down,screen)
     empty.move(screen)
