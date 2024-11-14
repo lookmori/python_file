@@ -10,14 +10,21 @@ class Empty(pygame.sprite.Sprite):
         random_X = random.randint(30,700)
         self.img_rect.center = (random_X,0)
         self.fireList = []
+        self.fire = Fire(screen,self.img_rect)
+        
         
 
     
 
     def move(self,screen):
-        random_Y = random.randint(0,10)
+        random_Y = random.randint(0,5)
         self.img_rect.y += random_Y
-        # fire = Fire(self)
-        # fire.move(screen)
-        sleep(0.03)
+        print(self.img_rect.y)
+        if self.img_rect.y > screen.get_height():
+            self.img_rect.y = 0
+            random_X = random.randint(30,700)
+            self.img_rect.center = (random_X,0)
+        self.fire.move(screen)
         screen.blit(self.img,self.img_rect)
+    
+        
