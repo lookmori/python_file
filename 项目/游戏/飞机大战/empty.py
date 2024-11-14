@@ -17,7 +17,7 @@ class Empty(pygame.sprite.Sprite):
     
 
     def move(self,screen):
-        random_Y = random.randint(0,5)
+        random_Y = random.randint(0,3)
         self.img_rect.y += random_Y
         print(self.img_rect.y)
         if self.img_rect.y > screen.get_height():

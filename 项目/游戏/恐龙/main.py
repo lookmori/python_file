@@ -6,14 +6,16 @@ pygame.init()
 
 screen = pygame.display.set_mode((800,600))
 clock = pygame.time.Clock()
-pygame.display.set_caption('飞机大战')
+pygame.display.set_caption('恐龙')
 flag = True
 
 screen.fill('white')
 bg_img = pygame.image.load(os.path.join(os.path.abspath(os.path.dirname(__file__)),'images/all.png'))
+kl_img = pygame.image.load(os.path.join(os.path.abspath(os.path.dirname(__file__)),'images/all.png'))
 
-bg_rect = bg_img.get_rect()
-bg_rect.center = (400,300) 
+clip_img = pygame.Rect(20,0,145,100)
+kl_img_rect = kl_img.subsurface(clip_img)
+
 
 
 # 飞机和敌机
@@ -26,7 +28,7 @@ while flag:
             flag = False
             
     key_down = pygame.key.get_pressed() 
-    screen.blit(bg_img,bg_rect)
+    screen.blit(kl_img_rect,(0,0,100,100))
 
     
     pygame.display.update()
