@@ -23,6 +23,31 @@ for i in range(2):
     bf_img_list.append(bg_img.subsurface(clip_img))
 
 
+#    LDPI: {
+#             CACTUS_LARGE: { x: 332, y: 2 },
+#             CACTUS_SMALL: { x: 228, y: 2 },
+#             CLOUD: { x: 86, y: 2 },
+#             HORIZON: { x: 2, y: 54 },
+#             MOON: { x: 484, y: 2 },
+#             PTERODACTYL: { x: 134, y: 2 },
+#             RESTART: { x: 2, y: 2 },
+#             TEXT_SPRITE: { x: 655, y: 2 },
+#             TREX: { x: 848, y: 2 },
+#             STAR: { x: 645, y: 2 }
+#         },
+#         HDPI: {
+#             CACTUS_LARGE: { x: 652, y: 2 },
+#             CACTUS_SMALL: { x: 446, y: 2 },
+#             CLOUD: { x: 166, y: 2 },
+#             HORIZON: { x: 2, y: 104 },
+#             MOON: { x: 954, y: 2 },
+#             PTERODACTYL: { x: 260, y: 2 },
+#             RESTART: { x: 2, y: 2 },
+#             TEXT_SPRITE: { x: 1294, y: 2 },
+#             TREX: { x: 1678, y: 2 },
+#             STAR: { x: 1276, y: 2 }
+#         }
+
 # 仙人掌
 # 仙人掌大小 35*70
 xrz_img_list = []
@@ -61,7 +86,7 @@ bf_timer = pygame.USEREVENT + 2
 pygame.time.set_timer(bf_timer,300)
 
 dxrz_timer = pygame.USEREVENT + 3
-pygame.time.set_timer(dxrz_timer,4500)
+pygame.time.set_timer(dxrz_timer,100)
 
 
 
@@ -79,9 +104,12 @@ def xrz_animotaion():
 
 # 大仙人掌动起来
 def dxrz_animotaion():
-    global dxrz_index,dxrz_img_list,dxrz_img_rect
+    global dxrz_index,dxrz_img_list,dxrz_img_rect,dxrz_img
     dxrz_index = randint(0,5)
-    dxrz_img_rect = dxrz_img_list[dxrz_index]
+    dxrz_img = dxrz_img_list[dxrz_index]
+    dxrz_img_rect = dxrz_img.get_rect()
+    dxrz_img_rect.x +=10
+    screen.blit(dxrz_img,dxrz_img_rect)
 # 恐龙动起来
 def kl_animotaion():
     global kl_index,kl_img_list,kl_img_rect,kl_img
@@ -118,9 +146,8 @@ while flag:
 
         if event.type == dxrz_timer:
             dxrz_animotaion()
-            screen.blit(dxrz_img_rect,(350,150,50,100))   
 
-            
+        
  
         key_down = pygame.key.get_pressed() 
 
