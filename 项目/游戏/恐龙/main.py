@@ -12,7 +12,15 @@ flag = True
 
 screen.fill('white')
 bg_img = pygame.image.load(os.path.join(os.path.abspath(os.path.dirname(__file__)),'images/all.png')).convert_alpha()
+grass = bg_img.subsurface(pygame.Rect(0,100,2440,30))
+grass_rect = grass.get_rect(center = (400,300))
+screen.blit(grass,grass_rect)
 
+def drawGrass():
+    global grass_rect,grass
+    grass_rect.x -= 10
+    if grass_rect.x > 2440 :
+        grass_rect.x = 0
 # 蝙蝠
 # 蝙蝠大小 90*90
 bf_img_list = []
@@ -131,6 +139,8 @@ def bf_animotaion():
 
 
 while flag:
+    
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             flag = False
@@ -159,7 +169,8 @@ while flag:
             kl_img_rect.y = 0
             screen.blit(kl_img,kl_img_rect)
 
-
+    screen.blit(grass,grass_rect)
+    drawGrass()
     pygame.display.update()
     clock.tick(60)
     
