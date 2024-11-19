@@ -14,12 +14,11 @@ screen.fill('white')
 bg_img = pygame.image.load(os.path.join(os.path.abspath(os.path.dirname(__file__)),'images/all.png')).convert_alpha()
 grass = bg_img.subsurface(pygame.Rect(0,100,2440,30))
 grass_rect = grass.get_rect(center = (400,300))
-screen.blit(grass,grass_rect)
 
 def drawGrass():
     global grass_rect,grass
     grass_rect.x -= 10
-    if grass_rect.x > 2440 :
+    if grass_rect.x > 8000 :
         grass_rect.x = 0
 # 蝙蝠
 # 蝙蝠大小 90*90
@@ -124,7 +123,6 @@ def kl_animotaion():
     kl_img = kl_img_list[kl_index]
     kl_img_rect = kl_img.get_rect()
     kl_index +=1
-    pygame.time.delay(200)
     if kl_index > 5:
         kl_index = 0
 
@@ -139,8 +137,8 @@ def bf_animotaion():
 
 
 while flag:
-    
-
+    clock.tick(60)
+    screen.fill('white')
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             flag = False
@@ -159,20 +157,26 @@ while flag:
 
         
  
-        key_down = pygame.key.get_pressed() 
+        # key_down = pygame.key.get_pressed() 
 
-        if  event.type == pygame.KEYDOWN:
-            if key_down[pygame.K_SPACE]: 
-                kl_img_rect.y += 20
-            screen.blit(kl_img,kl_img_rect)
-        if event.type == pygame.KEYUP:
-            kl_img_rect.y = 0
-            screen.blit(kl_img,kl_img_rect)
+        # if  event.type == pygame.KEYDOWN:
+        #     if key_down[pygame.K_SPACE]: 
+        #         kl_img_rect.y += 20
+        #     screen.blit(kl_img,kl_img_rect)
+        # if event.type == pygame.KEYUP:
+        #     kl_img_rect.y = 0
+        #     screen.blit(kl_img,kl_img_rect)
 
+    
+    #drawGrass()
+    grass_rect.x -= 3
+    if grass_rect.x > 800 :
+        grass_rect.x = 0
     screen.blit(grass,grass_rect)
-    drawGrass()
+    print(grass_rect)
     pygame.display.update()
-    clock.tick(60)
+    
+    
     
     
 
