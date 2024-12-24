@@ -68,13 +68,56 @@ def fly_move():
     bf_index = 0
     
 
+# 仙人掌
+# 仙人掌大小 35*70
+xrz_img_list = []
+xrz_index = 0
+for i in range(6):
+    clip_img = pygame.Rect(445 + i*35,0,35,70)
+    xrz_img_list.append(bg_img.subsurface(clip_img))
+
+
+# 大仙人掌
+# 大仙人掌 大小 50*90
+dxrz_img_list = []
+dxrz_index = 0
+for i in range(6):
+    clip_img = pygame.Rect(650 + i*50,0,50,95)
+    dxrz_img_list.append(bg_img.subsurface(clip_img))
+
+
+xrz_img = xrz_img_list[xrz_index]
+xrz_img_rect = xrz_img.get_rect(y=190,x= 1000)
+dxrz_img = dxrz_img_list[dxrz_index]
+dxrz_img_rect = dxrz_img.get_rect(y=160,x = 950)
+
+
+
+def xrz_move():
+  global xrz_img_rect,xrz_index,dxrz_index,dxrz_img_rect
+  xrz_img_rect.x -= 5
+  dxrz_img_rect.x -= 5
+  if xrz_img_rect.x <0:
+    xrz_index = random.randint(0,4)
+    xrz_img_rect.x = 1200
+  if dxrz_img_rect.x <0:
+    dxrz_index = random.randint(0,4)
+    dxrz_img_rect.x = 1200
+
+  
 
 kl_timer = pygame.USEREVENT + 1
-pygame.time.set_timer(kl_timer,1000)
+pygame.time.set_timer(kl_timer,50)
+
+fl_timer = pygame.USEREVENT + 2
+pygame.time.set_timer(fl_timer,100)
+xrz_timer = pygame.USEREVENT + 3
+pygame.time.set_timer(xrz_timer,50)
 
 
 flag = True
 while flag:
+  
   bf_img = bf_img_list[bf_index]
   kl_img = kl_img_list[kl_index]
   screen.fill('white')
@@ -85,23 +128,34 @@ while flag:
   if grass_rect.x < -1200:
     grass_rect.x = 0
 
-
-  fly_move()
-  screen.blit(bf_img,bf_img_rect)
-
-  kl_animotaion()
-  screen.blit(kl_img,kl_img_rect)
+ 
   
 
-
-
+  
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       pygame.quit()
     if event.type == kl_timer:
       kl_animotaion()
-    screen.blit(kl_img,kl_img_rect)
+    if event.type == fl_timer:
+      fly_move()
+    if event.type == xrz_timer:
+      xrz_move()
+    
 
+    if event.type == pygame.KEYDOWN: 
+      if event.key == pygame.K_RIGHT:
+        kl_img_rect.x += 10
+      if event.key == pygame.K_SPACE:
+        kl_img_rect.y -= 100
+        
+    if event.type == pygame.KEYUP:
+      if event.key == pygame.K_SPACE:
+        kl_img_rect.y += 100
+  screen.blit(bf_img,bf_img_rect)
+  screen.blit(kl_img,kl_img_rect)
+  screen.blit(xrz_img,xrz_img_rect)
+  screen.blit(dxrz_img,dxrz_img_rect)
   pygame.display.update()
   clock.tick(60)
 
